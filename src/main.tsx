@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/Home';
 import Post from './pages/Post';
 import Login from './pages/login';
+import PostManagement from './pages/PostManagement';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<HomePage />} />
         <Route path="/post/:id" element={<Post />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/postmanagement" element={<PostManagement />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

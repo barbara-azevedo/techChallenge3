@@ -56,7 +56,7 @@ const Login: React.FC = () => {
         // Lógica simples para validação de login (deve ser substituída por validação real)
         if (username === 'admin' && password === 'admin') {
             alert('Login bem-sucedido!');
-            navigate('/');  // Redireciona para a página principal após login bem-sucedido
+            navigate('/postmanagement');  // Redireciona para a página principal após login bem-sucedido
         } else {
             alert('Usuário ou senha incorretos!');
         }

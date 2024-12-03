@@ -12,6 +12,7 @@ const HomeContainer = styled.div`
 interface Post {
     id: number;
     title: string;
+    author: string;
     description: string;
 }
 
@@ -23,14 +24,14 @@ const Home: React.FC = () => {
     // Simula a busca de posts (pode ser de uma API)
     useEffect(() => {
         const fetchedPosts: Post[] = [
-          { id: 1, title: 'Primeiro Post', description: 'Descrição do post.' },
-          { id: 2, title: 'Segundo Post', description: 'Descrição do post.' },
-          { id: 3, title: 'Terceiro Post', description: 'Descrição do post.' },
-          { id: 4, title: 'Quarto Post', description: 'Descrição do post.' },
-          { id: 5, title: 'Quinto Post', description: 'Descrição do post.' },
-          { id: 6, title: 'Sexto Post', description: 'Descrição do post.' },
-          { id: 7, title: 'Setimo Post', description: 'Descrição do post.' },
-          { id: 8, title: 'Oitavo Post', description: 'Descrição do post.' },      
+          { id: 1, title: 'Primeiro Post', author: 'Autor 1', description: 'Descrição do post.' },
+          { id: 2, title: 'Segundo Post', author: 'Autor 2', description: 'Descrição do post.' },
+          { id: 3, title: 'Terceiro Post', author: 'Autor 3', description: 'Descrição do post.' },
+          { id: 4, title: 'Quarto Post', author: 'Autor 4', description: 'Descrição do post.' },
+          { id: 5, title: 'Quinto Post', author: 'Autor 5', description: 'Descrição do post.' },
+          { id: 6, title: 'Sexto Post', author: 'Autor 6', description: 'Descrição do post.' },
+          { id: 7, title: 'Setimo Post', author: 'Autor 7', description: 'Descrição do post.' },
+          { id: 8, title: 'Oitavo Post', author: 'Autor 8', description: 'Descrição do post.' },      
         ];
 
         setPosts(fetchedPosts);  // Define todos os posts

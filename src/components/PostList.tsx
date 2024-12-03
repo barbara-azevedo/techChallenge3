@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 interface Post {
     id: number;
+    author: string;
     title: string;
     description: string;
 }
@@ -31,6 +32,11 @@ const PostDescription = styled.p`
     color: #555;
 `;
 
+const PostAuthor = styled.p`
+    font-size: 12px;
+    color: #555;
+`;
+
 const PostLink = styled(Link)`
     text-decoration: none;
     color: #007bff;
@@ -48,6 +54,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                 posts.map((post) => (
                     <PostCard key={post.id}>
                         <PostTitle>{post.title}</PostTitle>
+                        <PostAuthor>{post.author}</PostAuthor>
                         <PostDescription>{post.description}</PostDescription>
                         <PostLink to={`/post/${post.id}`}>Leia mais...</PostLink>
                     </PostCard>
