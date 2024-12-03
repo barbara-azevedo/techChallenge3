@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import PostList from '../components/PostList';
 import styled from 'styled-components';
+//import posts from '../components/ListaPostsExemplo';
 
 const HomeContainer = styled.div`
     padding: 16px;
@@ -29,11 +30,7 @@ const Home: React.FC = () => {
           { id: 3, title: 'Terceiro Post', author: 'Autor 3', description: 'Descrição do post.' },
           { id: 4, title: 'Quarto Post', author: 'Autor 4', description: 'Descrição do post.' },
           { id: 5, title: 'Quinto Post', author: 'Autor 5', description: 'Descrição do post.' },
-          { id: 6, title: 'Sexto Post', author: 'Autor 6', description: 'Descrição do post.' },
-          { id: 7, title: 'Setimo Post', author: 'Autor 7', description: 'Descrição do post.' },
-          { id: 8, title: 'Oitavo Post', author: 'Autor 8', description: 'Descrição do post.' },      
-        ];
-
+         ];
         setPosts(fetchedPosts);  // Define todos os posts
         setFilteredPosts(fetchedPosts);  // Inicialmente, mostra todos os posts
     }, []);
@@ -44,6 +41,7 @@ const Home: React.FC = () => {
         const filtered = posts.filter(
             (post) =>
                 post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                post.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 post.description.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredPosts(filtered);  // Atualiza os posts filtrados
