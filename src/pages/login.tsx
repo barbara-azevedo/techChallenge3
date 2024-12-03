@@ -1,55 +1,88 @@
-// pages/Home.tsx
-import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import SearchBar from '../components/SearchBar';
-import PostList from '../components/PostList';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';  // Para redirecionamento
+import BackButton from '../components/BackButton';
 
-const HomeContainer = styled.div`
-    padding: 16px;
+// Estilos para a página de login
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
 `;
 
-interface Post {
-    id: number;
-    title: string;
-    description: string;
-}
+const LoginBox = styled.div`
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+`;
 
-const Home: React.FC = () => {
-    const [posts, setPosts] = useState<Post[]>([]);  // Todos os posts
-    const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);  // Posts filtrados
-    const [searchTerm, setSearchTerm] = useState('');  // Valor do termo de pesquisa
+const Title = styled.h2`
+    margin-bottom: 20px;
+`;
 
-    // Simula a busca de posts (pode ser de uma API)
-    useEffect(() => {
-        const fetchedPosts: Post[] = [
-            { id: 1, title: 'Post 1', description: 'Descrição do post 1' },
-            { id: 2, title: 'Post 2', description: 'Descrição do post 2' },
-            { id: 3, title: 'Post 3', description: 'Descrição do post 3' },
-        ];
+const Input = styled.input`
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+`;
 
-        setPosts(fetchedPosts);  // Define todos os posts
-        setFilteredPosts(fetchedPosts);  // Inicialmente, mostra todos os posts
-    }, []);
+const Button = styled.button`
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 
-    // Função de pesquisa que filtra os posts
-    const handleSearchChange = (searchTerm: string) => {
-        setSearchTerm(searchTerm);  // Atualiza o valor do termo de pesquisa
-        const filtered = posts.filter(
-            (post) =>
-                post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                post.description.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredPosts(filtered);  // Atualiza os posts filtrados
+    &:hover {
+        background-color: #0056b3;
+    }
+`;
+
+const Login: React.FC = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();  // Hook para navegação
+
+    const handleLogin = () => {
+        // Lógica simples para validação de login (deve ser substituída por validação real)
+        if (username === 'admin' && password === 'admin') {
+            alert('Login bem-sucedido!');
+            navigate('/');  // Redireciona para a página principal após login bem-sucedido
+        } else {
+            alert('Usuário ou senha incorretos!');
+        }
     };
 
     return (
-        <HomeContainer>
-            <Header />
-            <SearchBar onSearchChange={handleSearchChange} />
-            <PostList posts={filteredPosts} />  {/* Passa os posts filtrados para o PostList */}
-        </HomeContainer>
+        <Container>
+            <LoginBox>
+                <Title>Login</Title>
+                <Input
+                    type="text"
+                    placeholder="Usuário"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)} // Atualiza o estado com o valor do campo
+                />
+                <Input
+                    type="password"
+                    placeholder="Senha"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} // Atualiza o estado com o valor do campo
+                />
+                <Button onClick={handleLogin}>Entrar</Button>
+                <BackButton />
+            </LoginBox>
+        </Container>
     );
 };
 
-export default Home;
+export default Login;
