@@ -91,7 +91,7 @@ const PostManagement: React.FC = () => {
 
     const handleAddPost = () => {
         // Lógica para adicionar novo post (ex.: abrir modal ou redirecionar para uma página)
-        alert('Adicionar novo post!');
+        navigate('/createpost')
     };
 
     const handleEditPost = (id: number) => {

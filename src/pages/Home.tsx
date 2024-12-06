@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import PostList from '../components/PostList';
 import styled from 'styled-components';
-//import posts from '../components/ListaPostsExemplo';
+
 
 const HomeContainer = styled.div`
     padding: 16px;

@@ -4,7 +4,7 @@ import PostContent from '../components/PostContent';  // Componente para exibir 
 import BackButton from '../components/BackButton';   // Botão para voltar à home
 import posts from '../components/ListaPostsExemplo';
 import Header from '../components/Header';
-
+//import ListaPostsExemplo from '../services/data';
 
 const Post: React.FC = () => {
     const { id } = useParams<{ id: string }>();  // Captura o parâmetro 'id' da URL
