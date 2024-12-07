@@ -14,6 +14,7 @@ interface Post {
     id: number;
     title: string;
     author: string;
+    content: string;
     description: string;
 }
 
@@ -25,12 +26,15 @@ const Home: React.FC = () => {
     // Simula a busca de posts (pode ser de uma API)
     useEffect(() => {
         const fetchedPosts: Post[] = [
-          { id: 1, title: 'Primeiro Post', author: 'Autor 1', description: 'Descrição do post.' },
-          { id: 2, title: 'Segundo Post', author: 'Autor 2', description: 'Descrição do post.' },
-          { id: 3, title: 'Terceiro Post', author: 'Autor 3', description: 'Descrição do post.' },
-          { id: 4, title: 'Quarto Post', author: 'Autor 4', description: 'Descrição do post.' },
-          { id: 5, title: 'Quinto Post', author: 'Autor 5', description: 'Descrição do post.' },
-         ];
+            { id: 1, title: 'Post 1', author: 'Autor 1', content: 'TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 1' },
+            { id: 2, title: 'Post 2', author: 'Autor 2', content: 'TEXTO TESTE TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 2' },
+            { id: 3, title: 'Post 3', author: 'Autor 3', content: 'TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 3' },
+            { id: 4, title: 'Post 4', author: 'Autor 4', content: 'TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 4' },
+            { id: 5, title: 'Post 5', author: 'Autor 5', content: 'TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 5' },
+            { id: 6, title: 'Post 6', author: 'Autor 6', content: 'TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 6' },
+            { id: 7, title: 'Post 7', author: 'Autor 7', content: 'TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 7' },
+            { id: 8, title: 'Post 8', author: 'Autor 8', content: 'TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 8' },
+        ];
         setPosts(fetchedPosts);  // Define todos os posts
         setFilteredPosts(fetchedPosts);  // Inicialmente, mostra todos os posts
     }, []);
@@ -42,6 +46,7 @@ const Home: React.FC = () => {
             (post) =>
                 post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 post.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 post.description.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredPosts(filtered);  // Atualiza os posts filtrados
