@@ -12,6 +12,10 @@ const Button = styled.button`
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
 
     &:hover {
         background-color: #0056b3;

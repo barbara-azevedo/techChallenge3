@@ -39,6 +39,7 @@ const Button = styled.button`
     background-color: #007bff;
     color: white;
     border: none;
+    margin-bottom: 15px;
     border-radius: 4px;
     cursor: pointer;
 
@@ -53,10 +54,9 @@ const Login: React.FC = () => {
     const navigate = useNavigate();  // Hook para navegação
 
     const handleLogin = () => {
-        // Lógica simples para validação de login (deve ser substituída por validação real)
+        
         if (username === 'admin' && password === 'admin') {
-            alert('Login bem-sucedido!');
-            navigate('/postmanagement');  // Redireciona para a página principal após login bem-sucedido
+            navigate('/postmanagement');  // Redireciona para a página de gerenciamento de posts após login bem-sucedido
         } else {
             alert('Usuário ou senha incorretos!');
         }
@@ -70,13 +70,13 @@ const Login: React.FC = () => {
                     type="text"
                     placeholder="Usuário"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)} // Atualiza o estado com o valor do campo
+                    onChange={(e) => setUsername(e.target.value)} 
                 />
                 <Input
                     type="password"
                     placeholder="Senha"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)} // Atualiza o estado com o valor do campo
+                    onChange={(e) => setPassword(e.target.value)} 
                 />
                 <Button onClick={handleLogin}>Entrar</Button>
                 <BackButton />
