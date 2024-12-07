@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import HeaderLogoff from '../components/HeaderLogoff';
 
 const Container = styled.div`
     max-width: 800px;
@@ -103,9 +104,8 @@ const CreatePost: React.FC = () => {
 
     return (
         <Container>
-            <Header>
-                <Title>Criar Novo Post</Title>
-            </Header>
+            <HeaderLogoff/>
+            <Title>Criar Novo Post</Title>
             <Form onSubmit={handleSave}>
                 <Label htmlFor="title">Título</Label>
                 <Input

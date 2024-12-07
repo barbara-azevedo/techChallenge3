@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import HeaderLogoff from '../components/HeaderLogoff';
 
 interface Post {
     id: number;
@@ -32,6 +33,7 @@ const Button = styled.button`
     padding: 8px 16px;
     font-size: 14px;
     cursor: pointer;
+    margin-top: 16px;
 
     &:hover {
         background-color: #0056b3;
@@ -85,10 +87,6 @@ const PostManagement: React.FC = () => {
           { id: 8, title: 'Oitavo Post', author: 'Autor 8', description: 'Descrição do post.' }, 
     ]);
 
-    const handleLogout = () => {
-        navigate('/'); // Redireciona para a página inicial
-    };
-
     const handleAddPost = () => {
         navigate('/createpost')
     };
@@ -105,10 +103,7 @@ const PostManagement: React.FC = () => {
 
     return (
         <Container>
-            <Header>
-                <Title>Gerenciamento de Posts</Title>
-                <Button onClick={handleLogout}>Logout</Button>
-            </Header>
+            <HeaderLogoff/>
             <Button onClick={handleAddPost}>Adicionar Novo Post</Button>
             <Table>
                 <thead>

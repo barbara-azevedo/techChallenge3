@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from '../components/Header';
+import HeaderLogoff from '../components/HeaderLogoff';
 
 // Simulação de dados
 const posts = [
@@ -85,7 +85,7 @@ const EditPost: React.FC = () => {
 
     return (
         <FormContainer>
-            <Header />
+            <HeaderLogoff/>
             <h2>Editar Post</h2>
             <Input
                 type="text"

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -15,7 +15,7 @@ const Title = styled.h1`
     font-size: 32px;
 `;
 
-const LoginButton = styled.button`
+const LogoffButton = styled.button`
     background-color: white;
     color: black;
     border: none;
@@ -27,13 +27,22 @@ const LoginButton = styled.button`
     }
 `;
 
-const Header: React.FC = () => (
-    <HeaderContainer>
-        <Title>EDUCA ONLINE</Title>
-        <Link to="/login">
-            <LoginButton>Login</LoginButton>
-        </Link>
-    </HeaderContainer>
-);
+const HeaderLogoff: React.FC = () => {
 
-export default Header;
+    const navigate = useNavigate();
+    
+    const handleLogout = () => {
+        navigate('/'); // Redireciona para a página inicial
+    };
+
+    return (
+        <HeaderContainer>
+            <Title>EDUCA ONLINE</Title>
+            <LogoffButton onClick={handleLogout}>Logout</LogoffButton>
+        </HeaderContainer>
+    );
+};
+
+export default HeaderLogoff;
+
+
