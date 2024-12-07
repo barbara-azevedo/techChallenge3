@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PostContent from '../components/PostContent';  // Componente para exibir o conteúdo do post
-import BackButton from '../components/BackButton';   // Botão para voltar à home
+import PostContent from '../components/PostContent';  
+import BackButton from '../components/BackButton';  
 import posts from '../components/ListaPostsExemplo';
 import Header from '../components/Header';
-//import ListaPostsExemplo from '../services/data';
+
 
 const Post: React.FC = () => {
     const { id } = useParams<{ id: string }>();  // Captura o parâmetro 'id' da URL

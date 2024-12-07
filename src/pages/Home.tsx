@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);  // Posts filtrados
     const [searchTerm, setSearchTerm] = useState('');  // Valor do termo de pesquisa
 
-    // Simula a busca de posts (pode ser de uma API)
+    // Simula a busca de posts 
     useEffect(() => {
         const fetchedPosts: Post[] = [
             { id: 1, title: 'Post 1', author: 'Autor 1', content: 'TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO', description: 'Resumo do post 1' },

@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Login from '../pages/login';
 import Post from '../pages/Post';
 import PostManagement from '../pages/PostManagement';
+import EditPost from '../pages/EditPost';
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/postmanagement" element={<PostManagement />} />
         <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/edit/:id" element={<EditPost />} />
       </Routes>
     </Router>
   );

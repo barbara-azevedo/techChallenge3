@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';  // Para redirecionamento
+import { useNavigate } from 'react-router-dom'; 
 import BackButton from '../components/BackButton';
 
 // Estilos para a página de login

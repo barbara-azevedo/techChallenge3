@@ -92,23 +92,19 @@ const CreatePost: React.FC = () => {
     };
 
     const handleCancel = () => {
-        navigate(-1); // Retorna para a página anterior
+        navigate(-1); 
     };
 
     const handleSave = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Post criado:', formData);
-        // Aqui, você pode adicionar a lógica para salvar o post na API ou no estado global
-        navigate('/posts'); // Redireciona para a lista de posts (ou outra página)
+        navigate(-1);
     };
 
     return (
         <Container>
             <Header>
                 <Title>Criar Novo Post</Title>
-                <Button className="cancel" onClick={handleCancel}>
-                    Cancelar
-                </Button>
             </Header>
             <Form onSubmit={handleSave}>
                 <Label htmlFor="title">Título</Label>
