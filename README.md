@@ -87,17 +87,21 @@ Tecnologias utilizadas:
 
 ## Clone do repositório
 1. Clone o repositório:
+```bash
 git clone https://github.com/barbara-azevedo/techChallenge3.git
-
-2. Navegue até o diretório do respositório:
+````
+3. Navegue até o diretório do respositório:
+```bash
 cd techChallenge3
-
-3. Instale as dependências
+````
+5. Instale as dependências
+````bah
 npm install
-
-4. Execute o projeto
+````
+6. Execute o projeto
+````bash
 npm run dev
-
+````
 
 
 npm install react-router-dom
