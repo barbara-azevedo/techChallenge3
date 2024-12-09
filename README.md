@@ -34,36 +34,23 @@ Este projeto conta com as seguintes páginas:
 
 ## Estrutura do projeto
 A estrutura do projeto é organizada da seguinte forma:
-
+```bash
 src/   
 ├── assets/ 
-
 │ └── # Contém arquivos estáticos
-
 ├── components/ 
-
 │ └── # Contém componentes reutilizáveis da aplicação: backbutton, header, lista de posts, entre outros.
-
 ├── pages/ 
-
 │ └── # Contém as páginas da aplicação: home, login, leitura de post, edição de post, entre outros. 
-
 ├── routes/ 
-
 │ └── # Contém a configuração das rotas da aplicação.
-
 ├── services/ 
-
 │ └── # Contém serviços para comunicação com APIs e outras funcionalidades.
-
-├── app.tsx: Arquivo principal da aplicação.
-
-├── index.css: Ponto de entrada da aplicação.
-
-├── main.tsx: Arquivo de inicialização da aplicação.
-
-└── vite-env.d.ts: Arquivo de configuração do Vite.
-
+├── app.tsx # Arquivo principal da aplicação.
+├── index.css # Ponto de entrada da aplicação.
+├── main.tsx # Arquivo de inicialização da aplicação.
+└── vite-env.d.ts # Arquivo de configuração do Vite.
+```
 
 
 ## Rotas
