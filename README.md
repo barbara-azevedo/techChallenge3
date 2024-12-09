@@ -32,14 +32,74 @@ Este projeto conta com as seguintes páginas:
 
 # Documentação técnica de projeto
 
-## Arquitetura
+## Estrutura do projeto
+A estrutura do projeto é organizada da seguinte forma:
+
+src/   
+├── assets/ 
+
+│ └── # Contém arquivos estáticos
+
+├── components/ 
+
+│ └── # Contém componentes reutilizáveis da aplicação: backbutton, header, lista de posts, entre outros.
+
+├── pages/ 
+
+│ └── # Contém as páginas da aplicação: home, login, leitura de post, edição de post, entre outros. 
+
+├── routes/ 
+
+│ └── # Contém a configuração das rotas da aplicação.
+
+├── services/ 
+
+│ └── # Contém serviços para comunicação com APIs e outras funcionalidades.
+
+├── app.tsx: Arquivo principal da aplicação.
+
+├── index.css: Ponto de entrada da aplicação.
+
+├── main.tsx: Arquivo de inicialização da aplicação.
+
+└── vite-env.d.ts: Arquivo de configuração do Vite.
+
 
 
 ## Rotas
+As páginas/rotas são organizadas da seguinte forma:
+* Página inicial (Home): /
+* Post: /post/:id
+* Login: /login
+* Página de gerenciamento: /postmanagement
+* Criação de posts: /createpost
+* Edição de post: /edit/:id
+
+  :id é variável de acordo com o id do post selecionado. 
+
+
+# Requisitos e setup
+
+Tecnologias utilizadas:
+* React
+* Vite
+* Typescript
+
+## Clone do repositório
+1. Clone o repositório:
+git clone https://github.com/barbara-azevedo/techChallenge3.git
+
+2. Navegue até o diretório do respositório:
+cd techChallenge3
+
+3. Instale as dependências
+npm install
+
+4. Execute o projeto
+npm run dev
 
 
 
-## Requisitos e setup
 npm install react-router-dom
 npm install @types/react-router-dom
 
