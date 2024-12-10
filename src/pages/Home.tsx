@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import api from '../api';
 import postReducer from '../reducer/postReducer';
 import { Post } from '../common/common.entity';
-//import posts from '../components/ListaPostsExemplo';
 
 const HomeContainer = styled.div`
     padding: 16px;

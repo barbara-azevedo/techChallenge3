@@ -31,7 +31,7 @@ export interface CompletedPostProps {
 }
 
 export class Autor {
-  id?: string;
+  _id?: string;
   nome?: string;
   dtCriacao?: Date;
   dtModificacao?: Date;
@@ -42,4 +42,9 @@ export interface AuthorProps {
   nome?: string;
   dtCriacao?: Date;
   dtModificacao?: Date;
+}
+
+export class Usuario {
+  email?: string;
+  password?: string;
 }

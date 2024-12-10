@@ -12,8 +12,8 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Sitemark from './EducaOnlineIcon';
-import ColorModeIconDropdown from '../shared/ColorModeIconDropdown';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -32,11 +32,35 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 export default function AppAppBar() {
+
+  const navigate = useNavigate();
+
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
+
+  const logout = () => {
+    sessionStorage.removeItem('token')
+    sessionStorage.clear();
+  };
+
+  const LoginpPage = () => {
+    navigate('/login')
+  }
+
+  const homePage = () => {
+    navigate('/')
+  }
+
+  const editPost = () => {
+    navigate('/post-edit')
+  }
+
+  const novoPost = () => {
+    navigate('/post-add')
+  }
 
   return (
     <AppBar
@@ -56,8 +80,12 @@ export default function AppAppBar() {
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Link to='/' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Home</Link>
             </Box>
+
             <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 10 } }} >
-              <Link to='/post' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Posts</Link>
+              <Link to='/post-edit' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Edit Posts</Link>
+            </Box>
+            <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 10 } }} >
+              <Link to='/post-add' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Novo Post</Link>
             </Box>
           </Box>
           <Box
@@ -67,8 +95,10 @@ export default function AppAppBar() {
               alignItems: 'center',
             }}
           >
-            <Button color="primary" variant="text" size="small" >
-              <Link to='/login' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Login</Link>
+            <Button color="primary" variant="text" size="small">
+              <Link to='/login' style={{ textDecoration: 'none' }}>Login</Link>
+            </Button>
+            <Button color="primary" variant="text" size="small" style={{ fontWeight: 'bold', color: 'red' }} onClick={logout}>Logout
             </Button>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
@@ -97,19 +127,24 @@ export default function AppAppBar() {
                   </IconButton>
                 </Box>
                 <MenuItem>
-                  <Link to='/' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>
-                    Home
-                  </Link>
+                  <Button color="primary" style={{ fontWeight: 'bold', color: 'black' }} variant="outlined" fullWidth onClick={homePage}>Home
+                  </Button>
                 </MenuItem>
                 <MenuItem>
-                  <Link to='/posts' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>
-                    Posts
-                  </Link>
+                  <Button color="primary" style={{ fontWeight: 'bold', color: 'black' }} variant="outlined" fullWidth onClick={editPost}>Edit Posts
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button color="primary" style={{ fontWeight: 'bold', color: 'black' }} variant="outlined" fullWidth onClick={novoPost}>Novo Post
+                  </Button>
                 </MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
-                    <Link to='/login' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Login</Link>
+                  <Button color="primary" variant="outlined" fullWidth onClick={LoginpPage}>Login
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button color="primary" variant="outlined" fullWidth onClick={logout} style={{ fontWeight: 'bold', color: 'red' }}>Logout
                   </Button>
                 </MenuItem>
               </Box>
