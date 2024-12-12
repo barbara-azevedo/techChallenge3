@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import FindOnePost from '../pages/Post';
 import SignIn from '../pages/signIn';
 import AddPost from '../pages/post-add';
-import PostsEdit from '../pages/post-edit';
+import UpdatePost from '../pages/UpdatePost';
+import ManagerPost from '../pages/PostListEdit';
 
 const AppRoutes = () => {
   return (
@@ -12,7 +13,8 @@ const AppRoutes = () => {
         <Route path="/post/:id" element={<FindOnePost />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/post-add" element={<AddPost />} />
-        <Route path="/post-edit" element={<PostsEdit />} />
+        <Route path="/manager" element={<ManagerPost />} />
+        <Route path="/update-post/:id" element={<UpdatePost />} />
     </Routes>
   );
 };

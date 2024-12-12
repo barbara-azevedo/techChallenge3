@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import postReducer from '../reducer/postReducer';
-import { AuthorProps, Post, PostSingle } from '../common/common.entity';
+import { AuthorProps, Post } from '../common/common.entity';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';

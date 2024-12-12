@@ -38,7 +38,7 @@ export class Autor {
 }
 
 export interface AuthorProps {
-  id?: string;
+  _id?: string;
   nome?: string;
   dtCriacao?: Date;
   dtModificacao?: Date;

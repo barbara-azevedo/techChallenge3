@@ -55,7 +55,7 @@ export default function AppAppBar() {
   }
 
   const editPost = () => {
-    navigate('/post-edit')
+    navigate('/manager')
   }
 
   const novoPost = () => {
@@ -82,10 +82,7 @@ export default function AppAppBar() {
             </Box>
 
             <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 10 } }} >
-              <Link to='/post-edit' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Edit Posts</Link>
-            </Box>
-            <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 10 } }} >
-              <Link to='/post-add' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Novo Post</Link>
+              <Link to='/manager' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Gerenciamento</Link>
             </Box>
           </Box>
           <Box
@@ -131,11 +128,7 @@ export default function AppAppBar() {
                   </Button>
                 </MenuItem>
                 <MenuItem>
-                  <Button color="primary" style={{ fontWeight: 'bold', color: 'black' }} variant="outlined" fullWidth onClick={editPost}>Edit Posts
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button color="primary" style={{ fontWeight: 'bold', color: 'black' }} variant="outlined" fullWidth onClick={novoPost}>Novo Post
+                  <Button color="primary" style={{ fontWeight: 'bold', color: 'black' }} variant="outlined" fullWidth onClick={editPost}>Gerenciamento
                   </Button>
                 </MenuItem>
                 <Divider sx={{ my: 3 }} />

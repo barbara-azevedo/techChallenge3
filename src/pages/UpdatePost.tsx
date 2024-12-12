@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useReducer, useRef } from 'react';
 import Box from '@mui/material/Box';
-
+import { useNavigate, useParams } from 'react-router-dom';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import { InputLabel, MenuItem, Select, SelectChangeEvent, TextareaAutosize as BaseTextareaAutosize, Button, Stack } from '@mui/material';
-import { Autor } from '../common/common.entity';
+import { Autor, Post } from '../common/common.entity';
 import autorReducer from '../reducer/usuarioReducer';
 import api from '../api';
-import { useNavigate } from 'react-router-dom';
+import postReducer from '../reducer/postReducer';
 
 const blue = {
     100: '#DAECFF',
@@ -64,12 +64,16 @@ const TextareaAutosize = styled(BaseTextareaAutosize)(
 );
 
 const initialStateAutor = { autor: [] as Autor[] };
+const initialStatePost = { posts: Post };
 
-export default function AddPost() {
+export default function UpdatePost() {
 
     const navigate = useNavigate();
 
+    const { id } = useParams<{ id: string }>();
+
     const [stateAutor, dispatchAutor] = useReducer(autorReducer, initialStateAutor);
+    const [statePost, dispatch] = useReducer(postReducer, initialStatePost);
 
     const [_id, setAutor] = React.useState('');
     const [_titulo, setTitulo] = useState('');
@@ -79,6 +83,23 @@ export default function AddPost() {
         api.get('/autor/all')
             .then(response => {
                 dispatchAutor({ type: 'SET_AUTORS', payload: response.data });
+            })
+            .catch(error => {
+                console.error('Error fetching tasks:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+        api.get('/post/findOne/' + id)
+            .then(response => {
+
+                const post: Post = response.data;
+
+                setAutor('' + post.autor?.map(p => p._id).toString())
+                setTitulo('' + post.titulo)
+                setConteudo('' + post.conteudo)
+
+                dispatch({ type: 'SET_SINGLE_POST', payload: response.data });
             })
             .catch(error => {
                 console.error('Error fetching tasks:', error);
@@ -113,18 +134,19 @@ export default function AddPost() {
             }
 
             const body = { titulo: _titulo, conteudo: _conteudo, relationAutorId: _id }
-
-            api.post('/post/create',
+          
+            api.put('/post/update/' + id,
                 body,
                 {
                     headers: headers
                 }
             ).then(response => {
-                if (201 === response.status) {
+                if (200 === response.status) {
                     alert('Salvo com sucesso')
                     setAutor('')
                     setTitulo('')
                     setConteudo('')
+                    voltar()
                 }
             }).catch(error => {
                 if (401 === error.status) {
@@ -145,8 +167,8 @@ export default function AddPost() {
         navigate('/manager')
     }
 
-
     return (
+        
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
                 <InputLabel id="autorId">Author</InputLabel>
@@ -169,12 +191,13 @@ export default function AddPost() {
                 </Box>
                 <Box marginTop={'10px'}>
                     <Stack spacing={2} direction="row">
-                        <Button variant="text" onClick={() => { voltar() }}>Voltar</Button>
+                        <Button variant="text" onClick={() => {voltar()}}>Voltar</Button>
                         <Button fullWidth
                             size="small"
                             variant="contained"
                             onClick={handlerSubmit}>Salvar</Button>
                     </Stack>
+
                 </Box>
             </FormControl>
         </Box>
