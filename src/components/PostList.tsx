@@ -87,9 +87,8 @@ export function formatDate(date: any) {
 const PostList: React.FC<CompletedPostProps> = ({ posts }) => {
     const navigate = useNavigate();
 
-   return (
+    return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-
             <Box
                 sx={{
                     display: { xs: 'flex', sm: 'none' },
@@ -123,27 +122,33 @@ const PostList: React.FC<CompletedPostProps> = ({ posts }) => {
                 </Box>
             </Box>
 
-            <Grid container spacing={2} columns={12}>
-                {Array.from(Array(posts.length)).map((_, index) => (
-                    <Grid key={index} size={{ xs: 12, md: 6 }}>
-                        <SyledCard
-                            variant="outlined"
-                            tabIndex={0}
-                            onClick={() => navigate('/post/' + posts[index]._id)}
-                        >
-                            <SyledCardContent>
-                                <Typography gutterBottom variant="h6" component="div">
-                                    {posts[index].titulo}
-                                </Typography>
-                                <StyledTypography sx={{ mt: 2 }} variant="body2" color="text.secondary" gutterBottom>
-                                    {posts[index].conteudo}
-                                </StyledTypography>
-                            </SyledCardContent>
-                            <Author authors={posts[index].autor} _date={formatDate(posts[index].dtCriacao)} />
-                        </SyledCard>
-                    </Grid>
-                ))}
-            </Grid>
+            {posts.length === 0 ? (
+                <Typography variant="h6" align="center" sx={{ mt: 4 }}>
+                    Nenhum post encontrado.
+                </Typography>
+            ) : (
+                <Grid container spacing={2} columns={12}>
+                    {posts.map((post, index) => (
+                        <Grid key={index} size={{ xs: 12, md: 6 }}>
+                            <SyledCard
+                                variant="outlined"
+                                tabIndex={0}
+                                onClick={() => navigate('/post/' + post._id)}
+                            >
+                                <SyledCardContent>
+                                    <Typography gutterBottom variant="h6" component="div">
+                                        {post.titulo}
+                                    </Typography>
+                                    <StyledTypography sx={{ mt: 2 }} variant="body2" color="text.secondary" gutterBottom>
+                                        {post.conteudo}
+                                    </StyledTypography>
+                                </SyledCardContent>
+                                <Author authors={post.autor} _date={formatDate(post.dtCriacao)} />
+                            </SyledCard>
+                        </Grid>
+                    ))}
+                </Grid>
+            )}
         </Box>
     );
 };
