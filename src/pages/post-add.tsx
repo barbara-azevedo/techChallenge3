@@ -4,11 +4,12 @@ import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
-import { InputLabel, MenuItem, Select, SelectChangeEvent, TextareaAutosize as BaseTextareaAutosize, Button, Stack } from '@mui/material';
+import { InputLabel, MenuItem, Select, SelectChangeEvent, TextareaAutosize as BaseTextareaAutosize, Button, Stack, FormControlLabel, Checkbox, Paper, InputBase, Divider, IconButton } from '@mui/material';
 import { Autor } from '../common/common.entity';
 import autorReducer from '../reducer/usuarioReducer';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
 
 const blue = {
     100: '#DAECFF',
@@ -71,6 +72,10 @@ export default function AddPost() {
 
     const [stateAutor, dispatchAutor] = useReducer(autorReducer, initialStateAutor);
 
+    const [checked, setChecked] = React.useState(false);
+
+    const [_nome, setNewAutor] = React.useState('');
+
     const [_id, setAutor] = React.useState('');
     const [_titulo, setTitulo] = useState('');
     const [_conteudo, setConteudo] = useState('');
@@ -92,11 +97,118 @@ export default function AddPost() {
     const handlerChangeTitulo = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setTitulo(event.target.value);
     };
+    const handlerChangeNewAutor = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setNewAutor(event.target.value);
+    };
     const handlerChangeConteudo = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setConteudo(event.target.value);
     };
 
+    const handlerSubmitAutor = () => {
+
+        if (checked) {
+            if (!_nome)
+                return alert('Nome do Autor não informado')
+
+            if (sessionStorage.getItem('token')) {
+                let jwtStr = sessionStorage.getItem('token')?.toString();
+
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + jwtStr
+                }
+
+                const body = { nome: _nome }
+
+                api.post('/autor/create',
+                    body,
+                    {
+                        headers: headers
+                    }
+                ).then(response => {
+                    if (201 === response.status) {
+                        alert('Salvo com sucesso')
+                        setChecked(false)
+                        setNewAutor('')
+                        api.get('/autor/all')
+                            .then(response => {
+                                dispatchAutor({ type: 'SET_AUTORS', payload: response.data });
+                            })
+                            .catch(error => {
+                                console.error('Error fetching tasks:', error);
+                            });
+                        [];
+                    }
+                }).catch(error => {
+                    if (401 === error.status) {
+                        // sessionStorage.removeItem('token')
+                        alert('Seu token expirou, efetue novo login')
+                    } else {
+                        alert('Error fetching: ' + error.mensagem)
+                        console.error('Error fetching tasks:', error);
+                    }
+                });
+                [];
+            } else {
+                alert('Não autenticado')
+            }
+        }
+
+    }
+
     const handlerSubmit = () => {
+
+        if (checked) {
+            if (!_nome)
+                return alert('Nome do Autor não informado')
+
+            if (sessionStorage.getItem('token')) {
+                let jwtStr = sessionStorage.getItem('token')?.toString();
+
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + jwtStr
+                }
+
+                const body = { nome: _nome }
+
+                api.post('/autor/create',
+                    body,
+                    {
+                        headers: headers
+                    }
+                ).then(response => {
+                    if (201 === response.status) {
+                        alert('Salvo com sucesso')
+                        api.get('/autor/findSearch/' + _nome)
+                            .then(response => {
+                                const autor: Autor = response.data;
+                                setAutor('' + autor._id)
+                                console.log('novo autor ' + autor._id)
+                                dispatchAutor({ type: 'SET_AUTORS', payload: response.data });
+                            })
+                            .catch(error => {
+                                console.error('Error fetching tasks:', error);
+                            });
+                        [];
+                    }
+                }).catch(error => {
+                    if (401 === error.status) {
+                        // sessionStorage.removeItem('token')
+                        alert('Seu token expirou, efetue novo login')
+                    } else {
+                        alert('Error fetching: ' + error.mensagem)
+                        console.error('Error fetching tasks:', error);
+                    }
+                });
+                [];
+
+            } else {
+                alert('Não autenticado')
+            }
+
+        }
+
         if (!_id)
             return alert('Autor não selecionado')
         if (!_titulo)
@@ -145,10 +257,40 @@ export default function AddPost() {
         navigate('/manager')
     }
 
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(event.target.checked);
+    };
+
 
     return (
         <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+            <Box sx={{ maxWidth: '100%', marginTop: '20px' }}>
+                <FormControlLabel control={<Checkbox checked={checked}
+                    onChange={handleChange} />} label="Novo Autor" />
+                {checked ?
+                    //  <TextField value={_nome} onChange={handlerChangeNewAutor} fullWidth label="Novo Autor" id="newAutor" />
+
+                    <Paper
+                        component="form"
+                        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+                    >
+                        <InputBase
+                            sx={{ ml: 1, flex: 1 }}
+                            value={_nome}
+                            onChange={handlerChangeNewAutor}
+                            placeholder="Digite o nome do Autor"
+                            inputProps={{ 'aria-label': 'search google maps' }}
+                        />
+                        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+                        <IconButton color="primary" sx={{ p: '10px' }} aria-label="add" onClick={handlerSubmitAutor}>
+                            <AddIcon />
+                        </IconButton>
+                    </Paper>
+
+                    : ''
+                }
+            </Box>
+            <FormControl fullWidth style={{ marginTop: '10px' }}>
                 <InputLabel id="autorId">Author</InputLabel>
                 <Select
                     labelId="autorId"
@@ -161,6 +303,7 @@ export default function AddPost() {
                         <MenuItem key={index} value={stateAutor.autor[index]._id}>{stateAutor.autor[index].nome}</MenuItem>
                     ))}
                 </Select>
+
                 <Box sx={{ maxWidth: '100%', marginTop: '20px' }}>
                     <TextField value={_titulo} onChange={handlerChangeTitulo} fullWidth label="Titulo" id="titulo" />
                 </Box>
@@ -174,12 +317,12 @@ export default function AddPost() {
                             size="small"
                             color="success"
                             variant="contained"
-                            style={{color: 'white'}}
+                            style={{ color: 'white' }}
                             onClick={handlerSubmit}>Salvar</Button>
                     </Stack>
                 </Box>
             </FormControl>
-        </Box>
+        </Box >
 
     );
 }
