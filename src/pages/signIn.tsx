@@ -64,11 +64,15 @@ export default function SignIn() {
 
   const navigate = useNavigate();
 
+  const retornarHome = () => {
+    navigate('/')
+  }
+
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
 
-
+  
     let isValid = true;
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
@@ -93,7 +97,7 @@ export default function SignIn() {
         .then(response => {
           if (response.data.token) {
             sessionStorage.setItem('token', response.data.token)
-            navigate('/')
+            navigate('/manager')
           }
           else
             navigate('/login')
@@ -168,6 +172,13 @@ export default function SignIn() {
             onClick={validateInputs}
           >
             Entrar
+          </Button>
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={retornarHome}
+          >
+            Voltar
           </Button>
         </Box>
       </Card>
