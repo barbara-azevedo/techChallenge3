@@ -82,11 +82,11 @@ export default function SignIn() {
 
     if (!password.value || password.value.length < 3) {
       setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
+      setPasswordErrorMessage('');
       isValid = false;
     } else {
       setPasswordError(false);
-      setPasswordErrorMessage('');
+      setPasswordErrorMessage('Invalid password');
     }
     if (isValid) {
       api.post('/user', { email: email.value, senha: password.value })
