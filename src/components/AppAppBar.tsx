@@ -44,6 +44,7 @@ export default function AppAppBar() {
   const logout = () => {
     sessionStorage.removeItem('token')
     sessionStorage.clear();
+    navigate('/')
   };
 
   const LoginpPage = () => {
@@ -58,9 +59,10 @@ export default function AppAppBar() {
     navigate('/manager')
   }
 
-  const novoPost = () => {
-    navigate('/post-add')
+  const isAuthenticated = () => {
+    return Boolean(sessionStorage.getItem('token'));
   }
+
 
   return (
     <AppBar
@@ -92,11 +94,18 @@ export default function AppAppBar() {
               alignItems: 'center',
             }}
           >
-            <Button color="primary" variant="text" size="small">
-              <Link to='/login' style={{ textDecoration: 'none' }}>Login</Link>
-            </Button>
-            <Button color="primary" variant="text" size="small" style={{ fontWeight: 'bold', color: 'red' }} onClick={logout}>Logout
-            </Button>
+            {isAuthenticated() ? (
+              <>
+                <Button color="primary" variant="text" size="small" style={{ fontWeight: 'bold', color: 'red' }} onClick={logout}>Logout
+                </Button>        
+              </>
+            ) : (
+              <>
+                <Button color="primary" variant="text" size="small">
+                <Link to='/login' style={{ textDecoration: 'none' }}>Login</Link>
+                </Button>          
+              </>
+            )}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
@@ -133,12 +142,26 @@ export default function AppAppBar() {
                 </MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth onClick={LoginpPage}>Login
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth onClick={logout} style={{ fontWeight: 'bold', color: 'red' }}>Logout
-                  </Button>
+                  {isAuthenticated() ? (
+                    <>
+                      <Button 
+                        color="primary" 
+                        variant="outlined" 
+                        fullWidth 
+                        onClick={LoginpPage}>Login
+                      </Button>              
+                    </>
+                  ) : (
+                    <>
+                      <Button 
+                        color="primary" 
+                        variant="outlined" 
+                        fullWidth 
+                        onClick={logout} 
+                        style={{ fontWeight: 'bold', color: 'red' }}>Logout
+                      </Button>              
+                    </>
+                  )}
                 </MenuItem>
               </Box>
             </Drawer>
