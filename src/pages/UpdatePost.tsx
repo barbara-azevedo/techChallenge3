@@ -194,7 +194,9 @@ export default function UpdatePost() {
                         <Button variant="text" onClick={() => {voltar()}}>Voltar</Button>
                         <Button fullWidth
                             size="small"
+                            color="success"
                             variant="contained"
+                            style={{color: 'white'}}
                             onClick={handlerSubmit}>Salvar</Button>
                     </Stack>
 

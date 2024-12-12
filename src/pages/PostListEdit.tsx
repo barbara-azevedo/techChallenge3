@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses }  from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
@@ -14,12 +14,33 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import { Button, Stack } from '@mui/material';
+import { Button, Stack, TableHead } from '@mui/material';
 import { Post } from '../common/common.entity';
 import api from '../api';
 import postReducer from '../reducer/postReducer';
+import { styled } from '@mui/material/styles';
 
 import { useNavigate } from 'react-router-dom';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
 interface TablePaginationActionsProps {
   count: number;
@@ -196,8 +217,17 @@ export default function ManagerPost() {
           Adicionar Post
         </Button>
       </Stack>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <TableContainer component={Paper} style={{marginTop: '10px'}}>
+        <Table sx={{ minWidth: 500 }} size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="center">Titulo</StyledTableCell>
+              <StyledTableCell align="center">Conteúdo</StyledTableCell>
+              <StyledTableCell align="center">Data</StyledTableCell>
+              <StyledTableCell align="center">Editar</StyledTableCell>
+              <StyledTableCell align="center">Remover</StyledTableCell>
+            </TableRow>
+          </TableHead>
           <TableBody>
             {(rowsPerPage > 0
               ? statePost.posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -214,12 +244,12 @@ export default function ManagerPost() {
                   {formatDate(post.dtCriacao)}
                 </TableCell>
                 <TableCell style={{ width: 70 }} align="right">
-                  <Button onClick={() => {
+                  <Button color="success" style={{color: 'white'}} variant="contained"  onClick={() => {
                     setEdit(post)
                   }}>Editar</Button>
                 </TableCell>
                 <TableCell style={{ width: 70 }} align="right">
-                  <Button onClick={() => {
+                  <Button color="error" variant="contained" onClick={() => {
                     removePost(post)
                   }}>Remover</Button>
                 </TableCell>

@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import api from '../api';
-import { Avatar, AvatarGroup, Button, TextareaAutosize as BaseTextareaAutosize } from '@mui/material';
+import { Avatar, AvatarGroup, Button, TextareaAutosize as BaseTextareaAutosize, Stack } from '@mui/material';
 
 const blue = {
     100: '#DAECFF',
@@ -174,7 +174,9 @@ const FindOnePost: React.FC = () => {
                         </SyledCardContent>
                         <Author authors={statePost.posts.autor} _date={formatDate(statePost.posts.dtCriacao)} />
                     </SyledCard>
-                    <Button color="primary" variant="outlined" fullWidth onClick={voltarHome}>Voltar</Button>
+                    <Stack spacing={2} direction="row" style={{marginTop: '10px'}}>
+                        <Button variant="text" onClick={voltarHome}>Voltar</Button>
+                    </Stack>
                 </Grid>
             </Grid>
         </Box>
