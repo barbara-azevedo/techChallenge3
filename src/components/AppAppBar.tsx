@@ -82,10 +82,17 @@ export default function AppAppBar() {
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Link to='/' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Home</Link>
             </Box>
-
-            <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 10 } }} >
-              <Link to='/manager' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Gerenciamento</Link>
-            </Box>
+            {isAuthenticated() ? (
+              <>
+                <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 10 } }} >
+                  <Link to='/manager' style={{ textDecoration: 'none', fontWeight: 'bold', color: 'black' }}>Gerenciamento</Link>
+                </Box>
+              </>
+            ) : (
+              <>
+              </>
+            )}  
+            
           </Box>
           <Box
             sx={{
