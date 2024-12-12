@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
-import PostManagement from '../pages/PostManagement';
 import FindOnePost from '../pages/Post';
 import SignIn from '../pages/signIn';
 import AddPost from '../pages/post-add';
@@ -14,7 +13,6 @@ const AppRoutes = () => {
         <Route path="/login" element={<SignIn />} />
         <Route path="/post-add" element={<AddPost />} />
         <Route path="/post-edit" element={<PostsEdit />} />
-        <Route path="/postmanagement" element={<PostManagement />} />
     </Routes>
   );
 };
