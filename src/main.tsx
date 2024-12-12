@@ -1,15 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/Home';
-import Post from './pages/Post';
-import PostManagement from './pages/PostManagement';
-
 import { Container, Typography } from '@mui/material';
 import AppAppBar from './components/AppAppBar';
-import SignIn from './pages/signIn';
-import AddPost from './pages/post-add';
-import PostsEdit from './pages/post-edit';
+
+import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -26,16 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           </Typography>
           <Typography>Informações para seus estudos</Typography>
         </div>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/post/:id" element={<Post />} />
-
-          <Route path="/post-add" element={<AddPost />} />
-          <Route path="/post-edit" element={<PostsEdit />} />
-
-          <Route path="/postmanagement" element={<PostManagement />} />
-          <Route path="/login" element={<SignIn />} />
-        </Routes>
+        <App />
       </Container>
     </BrowserRouter>
   </React.StrictMode>
