@@ -197,7 +197,7 @@ export default function UpdatePost() {
                             color="success"
                             variant="contained"
                             style={{color: 'white'}}
-                            onClick={handlerSubmit}>Salvar</Button>
+                            onClick={handlerSubmit}>Publicar</Button>
                     </Stack>
 
                 </Box>

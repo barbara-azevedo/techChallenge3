@@ -11,6 +11,7 @@ import api from '../api';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 
+
 const blue = {
     100: '#DAECFF',
     200: '#b6daff',
@@ -237,6 +238,7 @@ export default function AddPost() {
                     setAutor('')
                     setTitulo('')
                     setConteudo('')
+                    navigate('/manager')
                 }
             }).catch(error => {
                 if (401 === error.status) {
@@ -318,7 +320,7 @@ export default function AddPost() {
                             color="success"
                             variant="contained"
                             style={{ color: 'white' }}
-                            onClick={handlerSubmit}>Salvar</Button>
+                            onClick={handlerSubmit}>Publicar</Button>
                     </Stack>
                 </Box>
             </FormControl>
