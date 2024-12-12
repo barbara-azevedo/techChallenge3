@@ -36,7 +36,8 @@ const Home: React.FC = () => {
         setSearchTerm(searchTerm);
         const filtered = posts.filter(
             (post) =>
-                post.conteudo?.toLowerCase().includes(searchTerm.toLowerCase())
+                post.conteudo?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                post.titulo?.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredPosts(filtered);
     };
