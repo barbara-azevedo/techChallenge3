@@ -3,26 +3,28 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Container, Typography } from '@mui/material';
 import AppAppBar from './components/AppAppBar';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AppAppBar />
-      <Container
-        maxWidth="lg"
-        component="main"
-        sx={{ display: 'flex', flexDirection: 'column', my: 16, gap: 4 }}
-      >
-        <div className="app-container">
-          <Typography variant="h1" gutterBottom>
+      <StyledEngineProvider injectFirst>
+        <AppAppBar />
+        <Container
+          maxWidth="lg"
+          component="main"
+          sx={{ display: 'flex', flexDirection: 'column', my: 16, gap: 4 }}
+        >
+
+          <Typography variant="h3" gutterBottom>
             EducaOnline
           </Typography>
           <Typography>Informações para seus estudos</Typography>
-        </div>
-        <App />
-      </Container>
+          <App />
+        </Container>
+      </StyledEngineProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

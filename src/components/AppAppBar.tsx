@@ -143,13 +143,20 @@ export default function AppAppBar() {
                   <Button color="primary" style={{ fontWeight: 'bold', color: 'black' }} variant="outlined" fullWidth onClick={homePage}>Home
                   </Button>
                 </MenuItem>
+                {isAuthenticated() ? (
+                   <>
                 <MenuItem>
                   <Button color="primary" style={{ fontWeight: 'bold', color: 'black' }} variant="outlined" fullWidth onClick={editPost}>Gerenciamento
                   </Button>
                 </MenuItem>
+                 </>
+                ) : (
+                  <>
+                  </>
+                )}  
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
-                  {isAuthenticated() ? (
+                  {!isAuthenticated() ? (
                     <>
                       <Button 
                         color="primary" 
