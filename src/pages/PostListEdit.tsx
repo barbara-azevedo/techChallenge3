@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses }  from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
@@ -152,7 +152,17 @@ export default function ManagerPost() {
   useEffect(() => {
     api.get('/post/all')
       .then(response => {
-        dispatchPost({ type: 'SET_POSTS', payload: response.data });
+        if (response.data) {
+          const p: Post[] = response.data;
+          const list = p.sort((a, b) => {
+            let x = (a.dtCriacao ? a.dtCriacao : new Date());
+            let y = (b.dtCriacao ? b.dtCriacao : new Date());
+            return x >= y
+              ? -1
+              : 1
+          });
+          dispatchPost({ type: 'SET_POSTS', payload: list });
+        }
       })
       .catch(error => {
         console.error('Error fetching tasks:', error);
@@ -217,7 +227,7 @@ export default function ManagerPost() {
           Adicionar Post
         </Button>
       </Stack>
-      <TableContainer component={Paper} style={{marginTop: '10px'}}>
+      <TableContainer component={Paper} style={{ marginTop: '10px' }}>
         <Table sx={{ minWidth: 500 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
@@ -244,7 +254,7 @@ export default function ManagerPost() {
                   {formatDate(post.dtCriacao)}
                 </TableCell>
                 <TableCell style={{ width: 70 }} align="right">
-                  <Button color="success" style={{color: 'white'}} variant="contained"  onClick={() => {
+                  <Button color="success" style={{ color: 'white' }} variant="contained" onClick={() => {
                     setEdit(post)
                   }}>Editar</Button>
                 </TableCell>

@@ -23,9 +23,19 @@ const Home: React.FC = () => {
     useEffect(() => {
         api.get('/post/all')
             .then(response => {
-                setPosts(response.data);  // Define todos os posts
-                setFilteredPosts(response.data);
-                dispatchPost({ type: 'SET_POSTS', payload: response.data });
+                if (response.data) {
+                    const p: Post[] = response.data;
+                    const list = p.sort((a, b) => {
+                        let x = (a.dtCriacao ? a.dtCriacao : new Date());
+                        let y = (b.dtCriacao ? b.dtCriacao : new Date());
+                        return x >= y
+                            ? -1
+                            : 1
+                    });
+                    setPosts(list);  // Define todos os posts
+                    setFilteredPosts(list);
+                    dispatchPost({ type: 'SET_POSTS', payload: list });
+                }
             })
             .catch(error => {
                 console.error('Error fetching tasks:', error);
