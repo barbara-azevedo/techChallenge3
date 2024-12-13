@@ -66,9 +66,9 @@ As páginas/rotas são organizadas da seguinte forma:
 * Página inicial (Home): /
 * Post: /post/:id
 * Login: /login
-* Página de gerenciamento: /ppost-edit
+* Página de gerenciamento: /manager
 * Criação de posts: /post-add
-
+* Edição de posts: /update-post/:id
 
   :id é variável de acordo com o id do post selecionado. 
 
